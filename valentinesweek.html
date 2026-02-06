@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Valentine's Week Adventure 💕</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffe6f2, #fff0f5);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      background: white;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      padding: 40px;
+      text-align: center;
+      max-width: 500px;
+      border: 3px solid #ff99cc;
+    }
+
+    .racoon {
+      width: 160px;
+      height: auto;
+      margin-bottom: 30px;
+      border-radius: 50%;
+      border: 6px solid #ffe6f2;
+      box-shadow: 0 8px 20px rgba(255,105,180,0.5);
+    }
+
+    h1 {
+      color: #e91e63;
+      margin: 0 0 15px 0;
+      font-size: 2.8em;
+    }
+
+    p {
+      color: #555;
+      font-size: 1.4em;
+      margin: 0 0 40px 0;
+    }
+
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .day-btn {
+      font-size: 1.3em;
+      padding: 18px 30px;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: bold;
+      box-shadow: 0 5px 0 rgba(0,0,0,0.2);
+    }
+
+    .day-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 0 rgba(0,0,0,0.2);
+    }
+
+    .rose { background: #ff5252; }
+    .propose { background: #f06292; }
+    .choco { background: #8d5524; }
+    .teddy { background: #ffca28; }
+    .promise { background: #4caf50; }
+    .hug { background: #2196f3; }
+    .kiss { background: #e91e63; }
+    .valentines { background: #c2185b; font-size: 1.5em; }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 50px rgba(233,30,99,0.4);
+      max-width: 90%;
+      width: 420px;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      border: 4px solid #ff4081;
+      animation: popIn 0.5s ease-out;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      80% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      border: 3px solid #ffe6f2;
+    }
+
+    .modal h2 {
+      color: #e91e63;
+      margin: 0 0 15px;
+      font-size: 2em;
+    }
+
+    .modal p {
+      color: #444;
+      font-size: 1.2em;
+      line-height: 1.5;
+      margin: 0 0 25px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 2em;
+      color: #e91e63;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .close-btn:hover {
+      color: #c2185b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <img 
+      class="racoon"
+      src="./image/couple racoon.jfif"
+      alt="cute raccoon"
+    />
+    
+    <h1>Yay! You Said Yes! 🥰</h1>
+    
+    <p>Let's make every day special...<br>Which day shall we celebrate first, my love? 💖</p>
+
+    <div class="days-grid">
+      <button class="day-btn1 rose1" data-day="Rose Day">Rose Day 🌹</button>
+      <button class="day-btn1 propose2" data-day="Propose Day">Propose Day 💍</button>
+      <button class="day-btn1 choco3" data-day="Chocolate Day">Chocolate Day 🍫</button>
+      <button class="day-btn1 teddy4" data-day="Teddy Day">Teddy Day 🧸</button>
+      <button class="day-btn1 promise5" data-day="Promise Day">Promise Day 🤝</button>
+      <button class="day-btn1 hug6" data-day="Hug Day">Hug Day 🤗</button>
+      <button class="day-btn1 kiss7" data-day="Kiss Day">Kiss Day 😘</button>
+      <button class="day-btn1 valentines8" data-day="Valentine’s Day">Valentine’s Day ❤️</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="romanticModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <img id="modalImage" class="modal-img" src="" alt="Romantic moment">
+      <h2 id="modalTitle"></h2>
+      <p id="modalLetter"></p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <script>
+    // Small confetti on page load
+    window.onload = () => {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    };
+
+    const modal = document.getElementById('romanticModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalLetter = document.getElementById('modalLetter');
+
+    const daysData = {
+      "Rose Day": {
+        title: "Rose Day 🌹",
+        letter: "My dearest love, each rose reminds me of the beauty you bring into my life every single day. Your smile blooms brighter than any flower, and my heart beats only for you. Here's to a lifetime of moments as beautiful as this rose. Forever yours, with all my love.HAPPY ROSE DAY",
+        image: src="./image/rose 2.jpeg"
+      },
+      "Propose Day": {
+        title: "Propose Day 💍",
+        letter: "I know that i have already proposed you and you said YES. i still remeber that day i was all tensed and you were so exited and happy. and to see that face... your happy face, i took an oath to do whatever makes you happy.so baby are you ready to be happy forever? in a simpler way.. Will you be mine forever??  ",
+        image: "./image/propose 2.jpeg"
+      },
+      "Chocolate Day": {
+        title: "Chocolate Day 🍫",
+        letter: "Life is like a chocolate box and each chocolate is like a portion of life",
+        image: "./image/kikkat.jpeg"
+      },
+      "Teddy Day": {
+        title: "Teddy Day 🧸",
+        letter: "This teddy is soft and cuddly, but nothing compares to the warmth of your embrace. When I hold you, I feel safe, loved, and complete. You're my comfort, my joy, my home. I want to cuddle with you forever, my sweet teddy bear.",
+        image: "https://m.media-amazon.com/images/I/71pjkQC7BEL._AC_UF894,1000_QL80_.jpg"
+      },
+      "Promise Day": {
+        title: "Promise Day 🤝",
+        letter: "I promise to stand by you through every storm and sunshine, to listen when words fail, to hold you when you need it most, and to love you fiercely every single day. My heart is yours — today, tomorrow, always. These promises are sealed with all my love.",
+        image: "https://images.pexels.com/photos/30268259/pexels-photo-30268259/free-photo-of-close-up-of-couple-holding-hands-with-rings.jpeg"
+      },
+      "Hug Day": {
+        title: "Hug Day 🤗",
+        letter: "In your arms is my favorite place to be. A hug from you feels like the whole world stops, and only we exist. Today, I send you the tightest, warmest virtual hug — but soon, I want to wrap you in my arms and never let go. You are my safe haven.",
+        image: "https://images.pexels.com/photos/30820467/pexels-photo-30820467/free-photo-of-romantic-couple-embracing-at-sunset.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      },
+      "Kiss Day": {
+        title: "Kiss Day 😘",
+        letter: "Every kiss from you feels like the first — electric, tender, full of promise. Your lips on mine make time disappear and my heart race. Today and always, I crave your kisses, your closeness, your love. You're my forever favorite feeling.",
+        image: "https://thumbs.dreamstime.com/b/silhouette-couple-against-background-valentine-s-heart-day-man-woman-kiss-lean-each-other-d-illustration-333675902.jpg"
+      },
+      "Valentine’s Day": {
+        title: "Valentine’s Day ❤️",
+        letter: "To the love of my life: You're not just my Valentine today — you're my every day, my every heartbeat. Thank you for choosing me, for loving me, for making every moment magical. Here's to us, to more laughter, more dreams, more love. I adore you beyond words.",
+        image: "https://thumbs.dreamstime.com/b/romantic-valentine-s-day-dinner-table-setting-heart-balloons-candles-wine-couples-celebration-celebrate-love-408163010.jpg"
+      }
+    };
+
+    function showModal(day) {
+      const data = daysData[day];
+      if (data) {
+        modalTitle.textContent = data.title;
+        modalLetter.textContent = data.letter;
+        modalImg.src = data.image;
+        modal.style.display = 'flex';
+
+        // Confetti celebration
+        confetti({
+          particleCount: 120,
+          spread: 90,
+          origin: { y: 0.6 },
+          colors: ['#ff4081', '#e91e63', '#ff80ab', '#ffd1dc']
+        });
+      }
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+
+    // Attach click events to buttons
+    document.querySelectorAll('.day-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const day = btn.getAttribute('data-day');
+        showModal(day);
+      });
+    });
+  </script>
+<!-- <a href="index.html">Back to Home</a> -->
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Will You Be My Valentine?</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffe6f2, #fff0f5);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      padding: 40px 50px;
+      text-align: center;
+      max-width: 420px;
+      border: 2px solid #ff99cc;
+      position: relative;
+      z-index: 10;
+    }
+
+    .racoon {
+      width: 180px;
+      height: auto;
+      margin-bottom: 25px;
+      border-radius: 50%;
+      border: 5px solid #ffe6f2;
+      box-shadow: 0 5px 15px rgba(255,105,180,0.4);
+    }
+
+    h1 {
+      color: #e91e63;
+      margin: 0 0 20px 0;
+      font-size: 2.4em;
+    }
+
+    p {
+      color: #444;
+      font-size: 1.3em;
+      margin: 0 0 35px 0;
+      line-height: 1.4;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+    }
+
+    button {
+      font-size: 1.4em;
+      padding: 16px 50px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-weight: bold;
+    }
+
+    #yes {
+      background: #ff4081;
+      color: white;
+      box-shadow: 0 6px 0 #c2185b;
+    }
+
+    #yes:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 0 #c2185b;
+    }
+
+    #no {
+      background: #78909c;
+      color: white;
+      box-shadow: 0 6px 0 #455a64;
+    }
+
+    #no:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 0 #455a64;
+    }
+
+    #no:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #455a64;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <img 
+      class="racoon"
+      src="./image/racoon 2.jfif"
+      alt="cute raccoon"
+    />
+    
+    <h1>My Dearest Love...... My Wife.....</h1>
+
+    <p>Our first Valentine’s Day together is coming. I know being apart is really hard, but no matter how big the
+      physical distance is, our hearts are so close like they’re one. No distance could change that. I want this "us"
+      forever
+
+      So… will you be my Valentine this year, and every year after? 💕</p>
+
+    <div class="buttons">
+      <button id="yes">YES 😍</button>
+      <button id="no">NO</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <script>
+    const yesButton = document.getElementById('yes');
+    const noButton  = document.getElementById('no');
+
+    function massiveConfettiExplosion() {
+      const duration = 5000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 8,
+          angle: 60,
+          spread: 80,
+          startVelocity: 70,
+          origin: { x: 0, y: Math.random() * 0.3 + 0.2 }
+        });
+        confetti({
+          particleCount: 8,
+          angle: 120,
+          spread: 80,
+          startVelocity: 70,
+          origin: { x: 1, y: Math.random() * 0.3 + 0.2 }
+        });
+
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
+
+      setTimeout(() => {
+        confetti({
+          particleCount: 150,
+          spread: 120,
+          startVelocity: 45,
+          ticks: 200,
+          shapes: ['circle', 'heart'],
+          colors: ['#ff4081', '#e91e63', '#ff80ab', '#f48fb1', '#ffd1dc', '#ffffff'],
+          origin: { y: 0.55 }
+        });
+      }, 300);
+
+      setTimeout(() => {
+        confetti({
+          particleCount: 120,
+          angle: 90,
+          spread: 45,
+          startVelocity: 35,
+          decay: 0.92,
+          scalar: 1.1,
+          shapes: ['star', 'circle'],
+          colors: ['#ffeb3b', '#ff9800', '#f44336', '#e91e63'],
+          origin: { y: 0.1 }
+        });
+      }, 800);
+
+      setTimeout(() => {
+        confetti({
+          particleCount: 200,
+          spread: 180,
+          startVelocity: 55,
+          ticks: 300,
+          origin: { y: Math.random() * 0.5 + 0.2 }
+        });
+      }, 1500);
+    }
+
+    yesButton.addEventListener('click', () => {
+      massiveConfettiExplosion();
+      alert("You said YES!!! 🥰🥰🥰\nI'm the luckiest raccoon husband ever! 💖🎉\nNow let's plan our whole week of love...");
+
+      // Redirect after 2.5 seconds (gives time to enjoy confetti + alert)
+      setTimeout(() => {
+        window.location.href = "valentinesweek.html";
+      }, 1000);
+    });
+
+    noButton.addEventListener('click', () => {
+      alert("Wait... are you sure? 😭\nThe raccoon is already crying...");
+    });
+  </script>
+<!-- <a href="valentinesweek.html">Go to About Page</a> -->
+
+</body>
+</html>
